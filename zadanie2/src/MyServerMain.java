@@ -7,9 +7,9 @@ public class MyServerMain {
     public static void main(String[] args) {
         try {
             // Set all properties first
-            System.setProperty("java.security.policy", "C:\\Users\\Greg\\IdeaProjects\\rmi-2\\zadanie1\\server.policy");
+            System.setProperty("java.security.policy", "C:\\Users\\Greg\\IdeaProjects\\rmi-2\\zadanie2\\server.policy");
             System.setProperty("java.rmi.server.codebase",
-                    "file:/c:/Users/Greg/IdeaProjects/rmi-2/zadanie1/bin");
+                    "file:/c:/Users/Greg/IdeaProjects/rmi-2/zadanie2/bin");
             System.out.println("Codebase: " + System.getProperty("java.rmi.server.codebase"));
 
             // Then enable the security manager
