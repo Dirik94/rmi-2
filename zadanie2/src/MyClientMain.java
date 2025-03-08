@@ -7,7 +7,7 @@ public class MyClientMain {
         System.setSecurityManager(new SecurityManager());
 
         try {
-            MyServerInt myRemoteObject = (MyServerInt) Naming.lookup("//localhost:1096/ABC");
+            MyServerInt myRemoteObject = (MyServerInt) Naming.lookup("//192.168.17.128:1096/ABC");
             MyClientCallbackImpl callback = new MyClientCallbackImpl("Client1");
             myRemoteObject.registerClient(callback);
 
