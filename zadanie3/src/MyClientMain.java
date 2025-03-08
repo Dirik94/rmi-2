@@ -1,36 +1,53 @@
 import java.rmi.Naming;
 import java.util.Scanner;
 
+/**
+ * Client application for the first player (X).
+ */
 public class MyClientMain {
+    private static final String SECURITY_POLICY = "server.policy";
+    private static final String CLIENT_NAME = "Client1";
+    private static final String RMI_URL = "//localhost:1096/ABC";
+
     public static void main(String[] args) {
-        System.setProperty("java.security.policy",
-                "C:\\Users\\Greg\\IdeaProjects\\rmi-2\\new-rmi-2\\rmi-2\\zadanie3\\server.policy");
+        System.setProperty("java.security.policy", SECURITY_POLICY);
         System.setSecurityManager(new SecurityManager());
 
         try {
-            MyServerInt myRemoteObject = (MyServerInt) Naming.lookup("//localhost:1096/ABC");
-            MyClientCallbackImpl callback = new MyClientCallbackImpl("Client1");
-            myRemoteObject.registerClient(callback);
+            runClient();
+        } catch (Exception e) {
+            System.err.println("Client error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Client1 Chat started. Type messages, or use commands:");
-            System.out.println(" '/g start' -> start a Tic Tac Toe game");
-            System.out.println(" '/g join'  -> join an ongoing game");
-            System.out.println(" '/g move row col' -> make a move");
-            System.out.println("Enter 'exit' to quit:");
+    private static void runClient() throws Exception {
+        MyServerInt server = (MyServerInt) Naming.lookup(RMI_URL);
+        MyClientCallbackImpl callback = new MyClientCallbackImpl(CLIENT_NAME);
+        server.registerClient(callback);
+
+        printInstructions();
+
+        try (Scanner scanner = new Scanner(System.in)) {
             while (scanner.hasNextLine()) {
                 String message = scanner.nextLine();
                 if ("exit".equalsIgnoreCase(message))
                     break;
-                // Send command without client prefix
+
+                // Send command without client prefix if game command
                 if (message.trim().startsWith("/g"))
-                    myRemoteObject.broadcastMessage(message, callback);
+                    server.broadcastMessage(message, callback);
                 else
-                    myRemoteObject.broadcastMessage("Client1: " + message, callback);
+                    server.broadcastMessage(CLIENT_NAME + ": " + message, callback);
             }
-            scanner.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+    }
+
+    private static void printInstructions() {
+        System.out.println(CLIENT_NAME + " Chat started. Type messages, or use commands:");
+        System.out.println(" '/g start' -> start a Tic Tac Toe game");
+        System.out.println(" '/g join'  -> join an ongoing game");
+        System.out.println(" '/g move row col' -> make a move (e.g., /g move 0 0)");
+        System.out.println("Enter 'exit' to quit");
     }
 }

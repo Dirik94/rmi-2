@@ -35,7 +35,7 @@
 2. Run:
 
    ```
-   java -cp bin "-Djava.security.policy=src\security.policy" MyClientMain //PlaywerX
+   java -cp bin "-Djava.security.policy=src\security.policy" MyClientMain //PlayerX
 
    java -cp bin "-Djava.security.policy=src\security.policy" MyClientMain2 //PlayerO
    ```

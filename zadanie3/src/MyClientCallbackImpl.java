@@ -1,8 +1,11 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * Implementation of the callback interface for client-side message reception.
+ */
 public class MyClientCallbackImpl extends UnicastRemoteObject implements MyClientCallback {
-    String clientName;
+    private final String clientName;
 
     protected MyClientCallbackImpl(String clientName) throws RemoteException {
         super();
@@ -14,7 +17,6 @@ public class MyClientCallbackImpl extends UnicastRemoteObject implements MyClien
         System.out.println(clientName + " received: " + message);
     }
 
-    // Added toString override to reliably return the client name
     @Override
     public String toString() {
         return clientName;
