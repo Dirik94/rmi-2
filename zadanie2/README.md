@@ -16,7 +16,7 @@
    ```
 3. Compile the Java source files:
    ```
-   javac -source 1.8 -target 1.8 -d bin src\*.java
+   javac -source 1.8 -target 1.8 -d bin src/*.java //linux
    ```
 
 ## Running the Server and Client
@@ -25,7 +25,7 @@
 
 1. In the project directory, run:
    ```
-   java -cp bin "-Djava.security.policy=src\security.policy" MyServerMain
+   java -cp bin -Djava.security.policy=src/security.policy MyServerMain //linux
    ```
 2. You should see a message indicating the server is waiting for client connections.
 
@@ -35,5 +35,6 @@
 2. Run:
    ```
    java -cp bin "-Djava.security.policy=src\security.policy" MyClientMain
+   java -cp bin -Djava.security.policy=src/security.policy MyClientMain2 //linux
    ```
 3. Check the console output on both ends for the request and response messages.
