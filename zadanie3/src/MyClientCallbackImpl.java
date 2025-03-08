@@ -13,4 +13,10 @@ public class MyClientCallbackImpl extends UnicastRemoteObject implements MyClien
     public void receiveMessage(String message) throws RemoteException {
         System.out.println(clientName + " received: " + message);
     }
+
+    // Added toString override to reliably return the client name
+    @Override
+    public String toString() {
+        return clientName;
+    }
 }

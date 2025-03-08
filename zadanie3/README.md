@@ -8,7 +8,7 @@
 
 1. Open a command prompt in the project directory:
    ```
-   cd C:\Users\Greg\IdeaProjects\rmi-2\zadanie2
+   cd C:\Users\Greg\IdeaProjects\rmi-2\new-rmi-2\rmi-2\zadanie3
    ```
 2. Create a `bin` directory (if it does not exist):
    ```
@@ -33,7 +33,11 @@
 
 1. Open a new command prompt in the same project directory.
 2. Run:
+
    ```
-   java -cp bin "-Djava.security.policy=src\security.policy" MyClientMain
+   java -cp bin "-Djava.security.policy=src\security.policy" MyClientMain //PlaywerX
+
+   java -cp bin "-Djava.security.policy=src\security.policy" MyClientMain2 //PlayerO
    ```
+
 3. Check the console output on both ends for the request and response messages.
