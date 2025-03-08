@@ -89,8 +89,8 @@ public class MyServerImpl extends UnicastRemoteObject implements MyServerInt {
                                         client.receiveMessage(boardStr);
                                     }
                                     if (game.checkWin()) {
-                                        expectedPlayer = (expected == 'X') ? "playerX" : "playerO";
                                         for (MyClientCallback client : clients) {
+                                            expectedPlayer = (expected == 'X') ? "playerX" : "playerO";
                                             client.receiveMessage("Player " + expectedPlayer + " wins!");
                                         }
                                         game = null;
